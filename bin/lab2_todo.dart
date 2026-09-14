@@ -1,5 +1,15 @@
-import 'package:lab2_todo/lab2_todo.dart' as lab2_todo;
+import "package:lab2_todo/todo.dart";
 
-void main(List<String> arguments) {
-  print('Hello world: ${lab2_todo.calculate()}!');
+void main(){
+ Todo task1 = Todo(id: 1, title: "Купить продукты");
+ Todo task2 = Todo(id: 2, title: "Сделать зарядку");
+ task1.complete();
+ print(task1);
+ print(task2);
+
+
+
+
 }
+
+
