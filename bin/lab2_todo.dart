@@ -48,8 +48,7 @@ void addTodo(List<Todo> todos){
     print("Название задачи не может быть пустым");
     return;
   }
-  int id = todos.isEmpty ? 1 : todos.last.id + 1;
-  todos.add(Todo(id: id, title: title.trim()));
+  todos.add(Todo(title: title.trim()));
   print("Задача добавлена");
 }
 void listTodos(List<Todo> todos){
