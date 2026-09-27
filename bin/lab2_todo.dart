@@ -1,5 +1,11 @@
 import "package:lab2_todo/todo.dart";
 import "dart:io";
+import "package:ansicolor/ansicolor.dart";
+
+final AnsiPen greenPen = AnsiPen()..green();
+final AnsiPen redPen = AnsiPen()..red();
+final AnsiPen bluePen = AnsiPen()..blue();
+final AnsiPen yellowPen = AnsiPen()..yellow();
 
 void main(){
   List<Todo> todos = [];
@@ -24,16 +30,16 @@ void main(){
         deleteTodo(todos);
         break;
       case "exit":
-        print("Выход из программы");
+        print(bluePen("Выход из программы"));
         return;
       default:
-        print("Неизвестная команда");
+        print(yellowPen("Неизвестная команда"));
     }
   }
 }
 void printmenu(){
   print("");
-  print("Todo лист");
+  print(yellowPen("Todo лист"));
   print("add    - Добавить задачу");
   print("list   - Показать список задач");
   print("done   - Отметить задачу как выполненную");
@@ -45,15 +51,15 @@ void addTodo(List<Todo> todos){
   stdout.write("Введите название задачи: ");
   String? title = stdin.readLineSync();
   if(title == null || title.isEmpty){
-    print("Название задачи не может быть пустым");
+    print(redPen("Название задачи не может быть пустым"));
     return;
   }
   todos.add(Todo(title: title.trim()));
-  print("Задача добавлена");
+  print(greenPen("Задача добавлена"));
 }
 void listTodos(List<Todo> todos){
   if(todos.isEmpty){
-    print("Список задач пуст");
+    print(bluePen("Список задач пуст"));
     return;
   }
   for(Todo todo in todos){
@@ -66,17 +72,17 @@ void comletetodo(List<Todo> todos){
   if(input == null ) return;
   int? id = int.tryParse(input.trim());
   if(id == null){
-    print("Введите число");
+    print(redPen("Введите число"));
     return;
   }
   for(var todo in todos){
     if(todo.id == id){
       todo.complete();
-      print("Задача выполнена");
+      print(greenPen("Задача выполнена"));
       return;
     }
   }
-  print("Задача с таким id не найдена");
+  print(redPen("Задача с таким id не найдена"));
 }
 void deleteTodo(List<Todo> todos){
   stdout.write("Введите id задачи: ");
@@ -84,15 +90,15 @@ void deleteTodo(List<Todo> todos){
   if(input == null ) return;
   int? id = int.tryParse(input.trim());
   if(id == null){
-    print("Введите число");
+    print(redPen("Введите число"));
     return;
   }
   for(int i = 0; i < todos.length; i++){
     if(todos[i].id == id){
       todos.removeAt(i);
-      print("задача удалена");
+      print(yellowPen("задача удалена"));
       return;
     }
   }
-  print("Задача с таким id не найдена");
+  print(redPen("Задача с таким id не найдена"));
 }
